@@ -16,7 +16,7 @@ def test_get_all_pets_with_valid_key(filter=''):
     assert len(result['pets']) > 0
 
 def test_post_new_pet_with_valid_data(name="Cat", animal_type="cat",
-                                      age='1', pet_photo="images/cat.jpg"):
+                                      age='1', pet_photo="cat.jpg"):
     pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
     _, auth_key = pf.get_api_key(valid_email, valid_password)
     status, result = pf.post_new_pet(auth_key, name, animal_type, age, pet_photo)
@@ -39,7 +39,7 @@ def test_delete_pet_successfully():
     _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
 
     if len(my_pets['pets']) == 0:
-        pf.post_new_pet(auth_key, "Cat-2", "кот", "3", "images/cat.jpg")
+        pf.post_new_pet(auth_key, "Cat-2", "кот", "3", "cat.jpg")
         _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
 
     pet_id = my_pets['pets'][0]['id']
@@ -126,7 +126,7 @@ def test_create_pet_simple_wrong_age(name="CatCat", animal_type="кот", age="�
 
 
 def test_post_new_pet_with_invalid_photo(name="Текст", animal_type="текстовый файл",
-                                      age='8 мин', pet_photo="images/photo.txt"):
+                                      age='8 мин', pet_photo="photo.txt"):
     '''Тест 9: Добавления питомца с текстовым файлом вместо фото.
     Баг. Должен быть файл в формате JPG, JPEG, PNG.'''
     pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
