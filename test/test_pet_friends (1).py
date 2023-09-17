@@ -16,14 +16,14 @@ def test_get_all_pets_with_valid_key(filter=''):
     assert len(result['pets']) > 0
 
 def test_post_new_pet_with_valid_data(name="Cat", animal_type="cat",
-                                      age='1', pet_photo="cat.jpg"):
+                                      age='1', pet_photo="images/cat.jpg"):
     pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
     _, auth_key = pf.get_api_key(valid_email, valid_password)
     status, result = pf.post_new_pet(auth_key, name, animal_type, age, pet_photo)
     assert status == 200
     assert result['name'] == name
 
-def test_update_pet_info_successfully(name="Dog", animal_type="dog", age="2"):
+def test_update_pet_info_successfully(name="Dog", animal_type="images/dog", age="2"):
     _, auth_key = pf.get_api_key(valid_email, valid_password)
     _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
 
